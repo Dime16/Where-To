@@ -1,0 +1,85 @@
+// ------------------ COLOR VARIABLES ----------------------------
+$color-blue-light-1: #CAE4DB;
+$color-blue-light-2: #7A9D96;
+
+$color-blue-dark-1: #00303F;
+
+$color-yelow-1: #DCAE1D;
+
+$color-blue-grey-1: #A9B7C0;
+
+$color-grey-dark: #777;
+$color-grey-dark-2: #999;
+$color-grey-dark-3: #333;
+
+$color-gold-1: #C0B283;
+
+
+
+
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    text-decoration: none;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 10/16 px = 62.5% --> 1 rem = 10px
+    
+    // @media only screen and (max-width: $bp-largest) {
+    //     font-size: 50%;
+    // }
+}
+
+body {
+    // font-family: 'Libre Baskerville', serif;
+    // font-family: 'Roboto Slab', serif;
+    // font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Khula', sans-serif;
+    color: $color-grey-dark-3;
+    font-weight: 400;
+}
+
+$a-tags: 'a, a:active, a:hover, a:visited';
+$a-tags-hover: 'a:active, a:hover';
+ 
+#{$a-tags} {
+//   color: $color-blue-2;
+  text-decoration: none;
+  color: inherit;
+}
+#{$a-tags-hover} {
+//   color: $color-blue-2;
+text-decoration: none;
+color: inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.wrapper-1 {
+    margin-left: auto;
+    margin-right: auto;
+    // width: 100%;
+}
+
+.wrapper-2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}

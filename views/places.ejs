@@ -1,0 +1,58 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Restoran</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Khula:300,400,600,700,800" rel="stylesheet">
+        <script src="main.js"></script>
+    </head>
+<body>
+
+    <section class="city">
+        <!-- <h1 class="city__info">City <%= city %></h1>
+        <h1 class="city__info">Temperature <%= temp %></h1>
+        <h1 class="city__info">Wind <%= wind %></h1> 
+        <h1 class="city__info">percip <%= percip %></h1> 
+        <h1 class="city__info">percipType <%= percipType %></h1>   -->
+        <div class="city__box">
+            <img src="<%= image %>" alt="" class="city__box__img">
+        </div>
+
+        <div class="city__container">
+            <h3 class="city__info">You have chosen the city of
+               <span class="city__capitalise"><%= city %> </span> to explore.
+                The current temperature in
+                <span class="city__capitalise"><%= city %> </span> is
+                <%= temp %> degrees celsius, the wind speed is
+                <%= wind %> km/h
+                and the chance of
+                <%= percipType %> is
+                <%= percip %>. We recommend choosing some of the following places for a good time. Keep exploring!
+            </h3>
+        
+            <form action="/places" method="POST" class="city__form-2 wrapper">
+        
+                <% for (var i = 0; i < selected.length; i++) { %>
+                <input name="<%=selected[i]%>" value="<%=names[i]%>" type="submit" class="city__form-2__submit">
+                <% } %>
+                <input class="city__form-2__hidden" type="text" name="city" value="<%= city %>" />
+                <input class="city__form-2__hidden" type="text" name="temp" value="<%= temp %>" />
+                <input class="city__form-2__hidden" type="text" name="wind" value="<%= wind %>" />
+                <input class="city__form-2__hidden" type="text" name="lat" value="<%= lat %>" />
+                <input class="city__form-2__hidden" type="text" name="lng" value="<%= lng %>" />
+        
+            </form>
+        </div>
+
+    </section>
+
+<section class="hidden">
+
+</section>
+
+
+</body>
+</html>

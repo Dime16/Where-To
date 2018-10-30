@@ -1,0 +1,47 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Restoran</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+</head>
+<body>
+    <!-- <h1>City <%= city %></h1>
+    <h1>Temperature <%= temp %></h1>
+    <h1>Wind <%= wind %></h1> -->
+    
+<section class="result">
+    <div class="city__box result__box">
+        <img src="<%= image %>" alt="" class="city__box__img">
+    </div>
+    <div class="result__container">
+
+        <h3 class="city__info result__info">You have searched for a <span class="city__capitalise">
+                <%= key %> </span> establishment in the city of
+            <span class="city__capitalise">
+                <%= city %> </span>.
+            Here is our selected places just for you. Have fun!
+        </h3>
+
+        <ul class="result__list">
+            <% for (var i = 0; i < name.length; i++) { %>
+            <li class="result__list__item">
+                <h3 class="result__list__item__name"><%= name[i].name %></h3>
+                <h3 class="result__list__item__rating">Average rating: <%= name[i].rating %></h3>
+                <p class="result__list__item__address">Location: <%= name[i].address %></p>
+               <div class="result__list__item__box">
+                    <img class="result__list__item__img" src="<%= name[i].photo %>">
+               </div>
+            </li>
+            <% } %>
+        </ul>
+
+    </div>
+</section>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
