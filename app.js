@@ -3,13 +3,14 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const moment = require('moment-timezone');
 const config  = require("./config");
+const aws = require('aws-sdk');
 const querystring = require('querystring'); 
 const path = require('path');
 const ejs = require('ejs');
 
 const app = express();
 
-app.use(bodyParser());
+// app.use(bodyParser());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -21,6 +22,13 @@ app.use(express.static(publicPath));
 app.use(bodyParser());
 app.set("view engine", "ejs");
 
+let key = new aws.S3({
+    weather: process.env.S3_WEKEY,
+    geo: process.env.S3_GEOKEY,
+    goog: process.env.S3_GOKEY
+});
+
+
 app.get("/", (req, res, next ) => {
     res.render("index.html");
 
@@ -29,7 +37,7 @@ app.get("/", (req, res, next ) => {
 app.post("/", (req, responce, next ) => {
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${config.geoKey}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${key.geo}&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "" || res.data.results[0].locations[0].adminArea5 == undefined) {
@@ -53,7 +61,7 @@ app.get("/index1", (req, responce, next) => {
 
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${config.geoKey}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${key.geo}&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "") {
@@ -79,7 +87,7 @@ app.get("/places", (req, res, next) => {
     var lat = req.query.lat;
     var lng = req.query.lng;
     
-            weatherURL = `https://api.darksky.net/forecast/${config.weadtherKey}/${lat},${lng}`;
+            weatherURL = `https://api.darksky.net/forecast/${key.weather}/${lat},${lng}`;
 
             return axios.get(weatherURL)
             .then((response) => {
@@ -117,17 +125,17 @@ app.get("/places", (req, res, next) => {
                 if((icon == "clear-day") && ((AmPm == "AM" && hours > 7) || (AmPm == "PM" && hours < 5))) {
                     selected = places.slice(0, 6);
                     namesSelected = names.slice(0, 6);
-                    image =  "/img/cities/aerial-architecture-blue-sky-466685.jpg";
+                    image =  "/img/cities/aerial-1.jpg";
                 } else if ((AmPm == "AM" && hours < 7) || (AmPm == "PM" && hours > 7)) {
                     selected = ["cafe", "restaurant", "bar",
                     "casino", "night_club"]
                     namesSelected = ["Cafe", "Restaurant", "Bar",
                     "Casino", "Night club"];
-                    image =  "/img/cities/architecture-buildings-burj-khalifa-599982-min.jpg";
+                    image =  "/img/cities/aeral-2.jpg";
                 } else {
                     selected = places.slice(3, places.length - 1);
                     namesSelected = names.slice(3, places.length - 1);
-                    image =  "/img/cities/architecture-buildings-business-1134166.jpg";
+                    image =  "/img/cities/rain-1.jpg";
                 }
            
                 res.render("places", {city: city, names: namesSelected, temp: temp, wind: wind, percip: percip, percipType: percipType, selected: selected, image: image, lat: lat, lng: lng, localTime: localTime, summary: summary});
@@ -155,7 +163,7 @@ app.post("/places", (req, res, next) => {
     let wind = req.body.wind;
     let time = req.body.localTime;
 
-    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+10000&type=${key}&key=${config.placeKey}`;
+    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+10000&type=${key}&key=${key.goog}`;
     
     axios.get(googleapi).then((responce) => {
     
@@ -197,7 +205,7 @@ app.post("/places", (req, res, next) => {
             name: e.name,
             rating: e.rating,
             address: e.vicinity,
-            photo: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${e.photos[0].photo_reference}&key=${config.placeKey}`
+            photo: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${e.photos[0].photo_reference}&key=${key.goog}`
         }
         name.push(place);
 
