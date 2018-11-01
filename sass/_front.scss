@@ -5,26 +5,10 @@
     justify-content: center;
     align-items: center;
 
-    &__bg {
-        height: 100vh;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: .3;
-        z-index: -1;
-        overflow: hidden;
-
-        &__video {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-    }
-
     &__form {
         display: flex;
         flex-direction: column;
+        align-items: center;
 
         &__header {
             font-size: 5rem;
@@ -32,19 +16,43 @@
             text-transform: uppercase;
             margin-bottom: 4rem;
             color: $color-blue-dark-1;
+
+            @media only screen and (max-width: $bp-medium1) {
+                font-size: 4rem
+            }
+
+            @media only screen and (max-width: $bp-small) {
+                font-size: 3rem
+            }
+
+            @media only screen and (max-width: $bp-smallest) {
+                font-size: 2.6rem
+            }
+
         }
 
 
         &__input {
             padding: 1rem 3rem;
             font-family: inherit;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 700;
             text-align: center;
             background-color: $color-blue-dark-1;
             opacity: .8;
             border: none;
             box-shadow: 5px 5px 10px $color-grey-dark-3;
+
+            
+            @media only screen and (max-width: $bp-small) {
+                font-size: 2.5rem;
+                padding: 1rem 2rem;
+            }
+
+            @media only screen and (max-width: $bp-smallest) {
+                font-size: 2rem;
+                padding: 1rem 1rem;
+            }
         }    
 
         &__submit {
@@ -61,6 +69,13 @@
             cursor: pointer;
             box-shadow: 5px 5px 10px $color-grey-dark-3;
             transition: all .3s;
+            width: 50%;
+
+            
+            @media only screen and (max-width: $bp-smallest) {
+                font-size: 1.8rem;
+                padding: 1rem 2.5rem;
+            }
 
             &:hover {
                 transform: translateY(-.3rem);

@@ -1,47 +1,146 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Restoran</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Khula:300,400,600,700,800" rel="stylesheet">
+    <link href="youtubeBG/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+
 </head>
+
 <body>
-    <!-- <h1>City <%= city %></h1>
-    <h1>Temperature <%= temp %></h1>
-    <h1>Wind <%= wind %></h1> -->
-    
-<section class="result">
-    <div class="city__box result__box">
-        <img src="<%= image %>" alt="" class="city__box__img">
-    </div>
-    <div class="result__container">
+    <section class="top">
+        <div id="bgndVideo" class="player" data-property="{videoURL:'http://youtu.be/UN3uF3990Q0',containment:'body',autoPlay:true, mute:true, startAt:46, opacity:.4}"></div>
+        <div class="top__bg"></div>
 
-        <h3 class="city__info result__info">You have searched for a <span class="city__capitalise">
-                <%= key %> </span> establishment in the city of
-            <span class="city__capitalise">
-                <%= city %> </span>.
-            Here is our selected places just for you. Have fun!
-        </h3>
+        <div class="top__nav wrapper">
+            <ul class="top__nav__list">
+                <li class="top__nav__list__home">
+                    <a href="/index.html">
+                        <svg class="top__nav__list__home__svg">
+                            <use xlink:href="/img/svg/sprite.svg#icon-home"></use>
+                        </svg>
+                    </a>
+                    <h4 class="top__nav__list__home__text">Home</h4>
+                </li>
+            </ul>
 
-        <ul class="result__list">
-            <% for (var i = 0; i < name.length; i++) { %>
-            <li class="result__list__item">
-                <h3 class="result__list__item__name"><%= name[i].name %></h3>
-                <h3 class="result__list__item__rating">Average rating: <%= name[i].rating %></h3>
-                <p class="result__list__item__address">Location: <%= name[i].address %></p>
-               <div class="result__list__item__box">
-                    <img class="result__list__item__img" src="<%= name[i].photo %>">
-               </div>
-            </li>
-            <% } %>
-        </ul>
+            <div class="top__nav__center">
+                <h4 class="top__nav__center__text">Where to?</h4>
+                <svg class="top__nav__center__svg">
+                    <use xlink:href="/img/svg/sprite.svg#icon-earth"></use>
+                </svg>
+            </div>
 
-    </div>
-</section>
+            <ul class="top__nav__right">
+                <li class="top__nav__right__item">
+                    <a href="https://www.facebook.com/profile.php?id=1245482540">
+                        <svg class="top__nav__right__item__svg">
+                            <use xlink:href="/img/svg/sprite.svg#icon-facebook"></use>
+                        </svg>
+                    </a>
+                </li>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="/js/main.js"></script>
+                <li class="top__nav__right__item">
+                    <a href="https://www.instagram.com/dimenajdovski/">
+                        <svg class="top__nav__right__item__svg">
+                            <use xlink:href="/img/svg/sprite.svg#icon-instagram"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="top__nav__right__item">
+                    <a href="https://www.linkedin.com/in/dime-najdovski-b91078171/">
+                        <svg class="top__nav__right__item__svg">
+                            <use xlink:href="/img/svg/sprite.svg#icon-linkedin2"></use>
+                        </svg>
+                    </a>
+                </li>
+
+                <li class="top__nav__right__item">
+                    <svg class="top__nav__right__item__svg">
+                        <use xlink:href="/img/svg/sprite.svg#icon-twitter"></use>
+                    </svg>
+                </li>
+            </ul>
+        </div>
+        <div class="top__center">
+            <h1 class="top__center__big"><span class="city__capitalise">
+                    <%= text %> </span> in <span class="city__capitalise">
+                    <%= city %> </span></h1>
+        </div>
+        <div class="top__bottom">
+            <svg class="top__bottom__btn">
+                <use xlink:href="/img/svg/sprite.svg#icon-circle-down"></use>
+            </svg>
+        </div>
+    </section>
+
+    <section class="result">
+
+        <div class="result__container">
+
+            <h3 class="city__info result__info">Our choice</h3>
+
+            <ul class="result__list">
+                <% for (var i = 0; i < name.length; i++) { %>
+                <li class="result__list__item">
+                    <h3 class="result__list__item__name">
+                        <%= name[i].name %>
+                    </h3>
+                    <h3 class="result__list__item__rating">Average rating:
+                        <%= name[i].rating %>
+                    </h3>
+                    <p class="result__list__item__address">Location:
+                        <%= name[i].address %>
+                    </p>
+                    <div class="result__list__item__box">
+                        <img class="result__list__item__img" src="<%= name[i].photo %>">
+                    </div>
+                </li>
+                <% } %>
+            </ul>
+
+        </div>
+    </section>
+
+    <footer class="footer wrapper">
+        <div class="footer__top">
+            <svg class="footer__top__btn">
+                <use xlink:href="/img/svg/sprite.svg#icon-circle-up"></use>
+            </svg>
+        </div>
+
+        <div class="footer__bottom">
+            <div class="footer__bottom__copy">
+                Copyright © 2018 Dime Najdovski. All Rights Reserved.
+            </div>
+
+            <div class="footer__bottom__logo">
+                <svg class="top__nav__center__svg">
+                    <use xlink:href="/img/svg/sprite.svg#icon-earth"></use>
+                </svg>
+                <h4 class="top__nav__center__text">Where to?</h4>
+            </div>
+
+            <div class="footer__bottom__mail">
+                <svg class="footer__bottom__mail__svg">
+                    <use xlink:href="/img/svg/sprite.svg#icon-envelope-o"></use>
+                </svg>
+                <p class="footer__bottom__mail__text">dime_najdovski@yahoo.com</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/youtubeBG/jquery.mb.YTPlayer.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/index.js"></script>
 </body>
+
 </html>

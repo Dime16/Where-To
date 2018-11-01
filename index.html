@@ -8,19 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
     <link href="https://fonts.googleapis.com/css?family=Khula:300,400,600,700,800" rel="stylesheet">
-    <script src="main.js"></script>
+    <link href="youtubeBG/css/jquery.mb.YTPlayer.min.css" media="all" rel="stylesheet" type="text/css">
+
+
 </head>
 
 <body>
     <main>
+        <div id="bgndVideo" class="player" data-property="{videoURL:'http://youtu.be/MMih5vtoV8Q',containment:'body',autoPlay:true, mute:true, startAt:0, opacity:.3}"></div>
         <section class="header">
-            <div class="header__bg">
-                <video class="header__bg__video" autoplay muted loop>
-                    <source src="img/video/Aerial Shot Of City.mp4" type="video/mp4">
-                    <source src="img/video.webm" type="video/webm">
-                    Your browser is not supported!
-                </video>
-            </div>
+
             <form action="/" method="POST" class="header__form" autocomplete="off">
                 <h1 class="header__form__header">Search a place to explore</h1>
                 <input type="text" name="city" class="header__form__input">
@@ -29,8 +26,9 @@
         </section>
     </main>
 
-
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/youtubeBG/jquery.mb.YTPlayer.js"></script>
+    <script src="/js/index.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,10 @@
 .city {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100vh;
 
     &__capitalise {
         text-transform: capitalize;
@@ -12,7 +17,7 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -21,6 +26,37 @@
         font-size: 3.5rem;
         width: 60%;
         text-align: center;
+
+        @media only screen and (max-width: $bp-medium) {
+            font-size: 3rem;
+            line-height: 1.4;
+            width: 70%;
+        }
+
+        
+        @media only screen and (max-width: $bp-medium1) {
+            font-size: 2.8rem;
+            line-height: 1.4;
+            width: 80%;
+        }
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 2.5rem;
+            line-height: 1.3;
+            width: 80%;
+        }
+
+        @media only screen and (max-width: $bp-smaller) {
+            font-size: 2.2rem;
+            line-height: 1.2;
+            width: 80%;
+        }
+
+        @media only screen and (max-width: $bp-smallest) {
+            font-size: 1.8rem;
+            line-height: 1.2;
+            width: 80%;
+        }
     }
 
 
@@ -31,6 +67,7 @@
         top: 0;
         left: 0;
         object-fit: cover;
+        z-index: -1;
 
         &__img {
             width: 100%;
@@ -45,6 +82,10 @@
         flex-wrap: wrap;
         align-items: center;
         justify-content: space-between;
+
+        @media only screen and (max-width: $bp-small) {
+            justify-content: space-evenly;
+        }
 
 
         &__submit {
@@ -70,6 +111,20 @@
             &:active {
                 box-shadow: 5px 5px 10px $color-grey-dark-3;
                 transform: translateY(0rem);
+            }
+
+            @media only screen and (max-width: $bp-small) {
+                flex: 0 0 40%;
+            }
+
+            @media only screen and (max-width: $bp-smaller) {
+                padding: 3.5rem 0;
+                font-size: 2.2rem;
+            }
+
+            @media only screen and (max-width: $bp-smallest) {
+                padding: 3rem 1rem;
+                font-size: 1.8rem;
             }
         }
 

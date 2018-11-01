@@ -1,8 +1,13 @@
 // ------------------ COLOR VARIABLES ----------------------------
 $color-blue-light-1: #CAE4DB;
 $color-blue-light-2: #7A9D96;
+$color-blue-light-3: #438496;
+$color-blue-light-4: #286DA8;
+$color-blue-light-5: #97aabd;
 
 $color-blue-dark-1: #00303F;
+$color-blue-dark-2: #242582;
+$color-blue-dark-3: #2f2fa2;
 
 $color-yelow-1: #DCAE1D;
 
@@ -14,6 +19,38 @@ $color-grey-dark-3: #333;
 
 $color-gold-1: #C0B283;
 
+$color-peach: #CD5360;
+
+$color-purple-1: #2e1114;
+$color-purple-2: #501b1d;
+$color-purple-3: #5d001e;
+$color-purple-4: #300110;
+
+$color-green-1: #379683;
+$color-green-2: #5CDB95;
+$color-green-3: #8ee4af;
+$color-green-4: #3feee6;
+
+$color-pink-1: #FC4445;
+$color-pink-2: #9e5a63;
+$color-pink-3: #c96567;
+$color-pink-4: #972f31;
+$color-pink-5: #F172a1;
+$color-pink-6: #e64398;
+
+
+
+// RESPONSIVE BREAKPOINTS
+
+$bp-largest: 75em;   // 1200px
+$bp-largest1: 68.75em;   // 1100px
+$bp-large: 62.5em;   // 1000px
+$bp-large1: 56.25em;   // 900px
+$bp-medium: 50em;    // 800px;
+$bp-medium1: 43.75em;    // 700px;
+$bp-small: 37.5em;    // 600px;
+$bp-smaller: 31.25em;  // 500px
+$bp-smallest: 25em;    // 400px;
 
 
 
@@ -31,9 +68,9 @@ html {
     box-sizing: border-box;
     font-size: 62.5%; // 10/16 px = 62.5% --> 1 rem = 10px
     
-    // @media only screen and (max-width: $bp-largest) {
-    //     font-size: 50%;
-    // }
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 50%;
+    }
 }
 
 body {
@@ -70,6 +107,10 @@ button:focus {
     margin-left: auto;
     margin-right: auto;
     width: 80%;
+
+    @media only screen and (max-width: $bp-medium) {
+        width: 95%;
+    }
 }
 
 .wrapper-1 {

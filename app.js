@@ -4,7 +4,6 @@ const axios = require('axios');
 const moment = require('moment-timezone');
 const config  = require("./config");
 const querystring = require('querystring'); 
-// var url = require('url');
 const path = require('path');
 const ejs = require('ejs');
 
@@ -22,10 +21,6 @@ app.use(express.static(publicPath));
 app.use(bodyParser());
 app.set("view engine", "ejs");
 
-
-// var lat;
-// var lng;
-
 app.get("/", (req, res, next ) => {
     res.render("index.html");
 
@@ -35,8 +30,6 @@ app.post("/", (req, responce, next ) => {
     var city = req.body.city;
 
     var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${config.geoKey}&location=${city}`
-
-    console.log(geocodeURL);
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "" || res.data.results[0].locations[0].adminArea5 == undefined) {
@@ -85,7 +78,6 @@ app.get("/places", (req, res, next) => {
     var city = req.query.city;
     var lat = req.query.lat;
     var lng = req.query.lng;
-    // console.log(req.query.city);
     
             weatherURL = `https://api.darksky.net/forecast/${config.weadtherKey}/${lat},${lng}`;
 
@@ -95,7 +87,7 @@ app.get("/places", (req, res, next) => {
                 wind = response.data.currently.windSpeed,
                 icon = response.data.currently.icon,
                 summary = response.data.currently.summary,
-                percip = response.data.currently.precipProbability,
+                percip = response.data.currently.precipProbability * 100,
                 percipType;
 
                 var time = response.data.timezone;
@@ -112,7 +104,6 @@ app.get("/places", (req, res, next) => {
                 } else {
                     percipType = response.data.currently.precipType;
                 }
-                // console.log(icon, summary, lat, lng, city);
                 var places = ["amusement_park", "park", "zoo", "cafe", "restaurant", "bar",
                 "casino", "movie_theater","shopping_mall", "night_club"];
                 var names = places.map((str) => {
@@ -127,7 +118,7 @@ app.get("/places", (req, res, next) => {
                     selected = places.slice(0, 6);
                     namesSelected = names.slice(0, 6);
                     image =  "/img/cities/aerial-architecture-blue-sky-466685.jpg";
-                } else if ((AmPm == "AM" && hours < 7) || (AmPm == "PM" && hours > 5)) {
+                } else if ((AmPm == "AM" && hours < 7) || (AmPm == "PM" && hours > 7)) {
                     selected = ["cafe", "restaurant", "bar",
                     "casino", "night_club"]
                     namesSelected = ["Cafe", "Restaurant", "Bar",
@@ -139,7 +130,7 @@ app.get("/places", (req, res, next) => {
                     image =  "/img/cities/architecture-buildings-business-1134166.jpg";
                 }
            
-                res.render("places", {city: city, names: namesSelected, temp: temp, wind: wind, percip: percip, percipType: percipType, selected: selected, image: image, lat: lat, lng: lng});
+                res.render("places", {city: city, names: namesSelected, temp: temp, wind: wind, percip: percip, percipType: percipType, selected: selected, image: image, lat: lat, lng: lng, localTime: localTime, summary: summary});
 
                 // clear-day, clear-night, rain, snow, sleet, wind, fog, cloudy, partly-cloudy-day, or partly-cloudy-night
                 //  Tuka treba uste uslovi.
@@ -162,8 +153,9 @@ app.post("/places", (req, res, next) => {
     let city = req.body.city;
     let temp = req.body.temp;
     let wind = req.body.wind;
+    let time = req.body.localTime;
 
-    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+6000&type=${key}&key=${config.placeKey}`;
+    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+10000&type=${key}&key=${config.placeKey}`;
     
     axios.get(googleapi).then((responce) => {
     
@@ -212,9 +204,9 @@ app.post("/places", (req, res, next) => {
        });
        var image = `/img/background/${key}.jpg`
 
-       console.log(config);
+        var text = key.charAt(0).toUpperCase() + key.slice(1).replace(/_/, ' ');
        
-        return res.render("choice", {name: name, city:city, image: image, wind: wind, temp:temp, key: key});
+        return res.render("choice", {name: name, city:city, image: image, wind: wind, temp:temp, text: text});
 
     }).catch((e) => {  
         console.log(e.message);
