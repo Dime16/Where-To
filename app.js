@@ -24,7 +24,7 @@ let s3 = new aws.S3({
     goog: process.env.S3_GOKEY
 });
 
-
+console.log(s3.geo);
 app.get("/", (req, res, next ) => {
     res.render("index.html");
 
