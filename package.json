@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "npm-run-all --parallel devserver watch:sass",
+    "start": "node app.js",
     "watch:sass": "node-sass sass/main.scss css/style.css -w",
     "devserver": "nodemon"
   },

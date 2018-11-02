@@ -19,10 +19,11 @@ const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, "/");
 
 app.use(express.static(publicPath));
-app.use(bodyParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
-let key = new aws.S3({
+let s3 = new aws.S3({
     weather: process.env.S3_WEKEY,
     geo: process.env.S3_GEOKEY,
     goog: process.env.S3_GOKEY
@@ -37,7 +38,7 @@ app.get("/", (req, res, next ) => {
 app.post("/", (req, responce, next ) => {
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${key.geo}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${s3.geo}&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "" || res.data.results[0].locations[0].adminArea5 == undefined) {
@@ -61,7 +62,7 @@ app.get("/index1", (req, responce, next) => {
 
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${key.geo}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${s3.geo}&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "") {
@@ -87,7 +88,7 @@ app.get("/places", (req, res, next) => {
     var lat = req.query.lat;
     var lng = req.query.lng;
     
-            weatherURL = `https://api.darksky.net/forecast/${key.weather}/${lat},${lng}`;
+            weatherURL = `https://api.darksky.net/forecast/${s3.weather}/${lat},${lng}`;
 
             return axios.get(weatherURL)
             .then((response) => {
@@ -163,7 +164,7 @@ app.post("/places", (req, res, next) => {
     let wind = req.body.wind;
     let time = req.body.localTime;
 
-    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+10000&type=${key}&key=${key.goog}`;
+    var googleapi = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${lat},${lng}&radius=+10000&type=${key}&key=${s3.goog}`;
     
     axios.get(googleapi).then((responce) => {
     
@@ -205,7 +206,7 @@ app.post("/places", (req, res, next) => {
             name: e.name,
             rating: e.rating,
             address: e.vicinity,
-            photo: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${e.photos[0].photo_reference}&key=${key.goog}`
+            photo: `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${e.photos[0].photo_reference}&key=${s3.goog}`
         }
         name.push(place);
 
