@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 let s3 = new aws.S3({
     weather: process.env.S3_WEKEY,
     geo: process.env.S3_GEOKEY,
-    goog: process.env.S3_GOKEY
+    goog: process.env.S3_SECRET
 });
 
 console.log(s3.geo);
@@ -121,7 +121,7 @@ app.get("/places", (req, res, next) => {
                 if((icon == "clear-day") && ((AmPm == "AM" && hours > 7) || (AmPm == "PM" && hours < 5))) {
                     selected = places.slice(0, 6);
                     namesSelected = names.slice(0, 6);
-                    image =  "/img/cities/aerial-1.jpg";
+                    image =  "/img/cities/aeral-1.jpg";
                 } else if ((AmPm == "AM" && hours < 7) || (AmPm == "PM" && hours > 7)) {
                     selected = ["cafe", "restaurant", "bar",
                     "casino", "night_club"]
