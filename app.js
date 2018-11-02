@@ -2,18 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const axios = require('axios');
 const moment = require('moment-timezone');
-const config  = require("./config");
+// const config  = require("./config");
 const aws = require('aws-sdk');
 const querystring = require('querystring'); 
 const path = require('path');
 const ejs = require('ejs');
 
 const app = express();
-
-// app.use(bodyParser());
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
 
 const port = process.env.PORT || 3000;
 const publicPath = path.join(__dirname, "/");
