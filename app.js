@@ -33,7 +33,7 @@ app.get("/", (req, res, next ) => {
 app.post("/", (req, responce, next ) => {
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${s3.geo}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=cRxoUwcGCmTPSTNYeq0jtVidw9sFQ8wU&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "" || res.data.results[0].locations[0].adminArea5 == undefined) {
@@ -57,7 +57,7 @@ app.get("/index1", (req, responce, next) => {
 
     var city = req.body.city;
 
-    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=${s3.geo}&location=${city}`
+    var geocodeURL = `http://www.mapquestapi.com/geocoding/v1/address?key=cRxoUwcGCmTPSTNYeq0jtVidw9sFQ8wU&location=${city}`
  
     axios.get(geocodeURL).then((res) => {
         if(res.data.results[0].locations[0].adminArea5 == "") {
@@ -83,7 +83,7 @@ app.get("/places", (req, res, next) => {
     var lat = req.query.lat;
     var lng = req.query.lng;
     
-            weatherURL = `https://api.darksky.net/forecast/${s3.weather}/${lat},${lng}`;
+            weatherURL = `https://api.darksky.net/forecast/b0708b0871093b854dca9cbd4f3b334f/${lat},${lng}`;
 
             return axios.get(weatherURL)
             .then((response) => {
